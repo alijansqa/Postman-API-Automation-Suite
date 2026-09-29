@@ -1,0 +1,768 @@
+{
+  "info": {
+    "_postman_id": "c7b6d8af-9c4f-4b54-8250-2639eee65298",
+    "name": "Books",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "44745288",
+    "_collection_link": "https://go.postman.co/collection/44745288-c7b6d8af-9c4f-4b54-8250-2639eee65298?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GET Base API & Sve in Env by Script",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 200 OK\", function () {\r\n    pm.response.to.have.status(200);\r\n\r\n});\r\n\r\npm.environment.set(\"baseURL\", pm.request.url.toString());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://library-api.postmanlabs.com",
+          "protocol": "https",
+          "host": [
+            "library-api",
+            "postmanlabs",
+            "com"
+          ],
+          "query": [
+            {
+              "key": "genre",
+              "value": "fiction",
+              "description": "a genre to filter for",
+              "disabled": true
+            },
+            {
+              "key": "checkedOut",
+              "value": "false",
+              "description": "a value true or false",
+              "disabled": true
+            },
+            {
+              "key": "search",
+              "value": "borges",
+              "description": "a search term to match against author or title",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Books",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseURL}}/books",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books"
+          ],
+          "query": [
+            {
+              "key": "genre",
+              "value": "fiction",
+              "description": "a genre to filter for",
+              "disabled": true
+            },
+            {
+              "key": "checkedOut",
+              "value": "false",
+              "description": "a value true or false",
+              "disabled": true
+            },
+            {
+              "key": "search",
+              "value": "borges",
+              "description": "a search term to match against author or title",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Filter Books by Query Parameter",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books?genre=fiction",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books"
+          ],
+          "query": [
+            {
+              "key": "genre",
+              "value": "fiction"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Filter Books by Multiples Query Parameter",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books?genre=fiction&checkedOut=true",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books"
+          ],
+          "query": [
+            {
+              "key": "genre",
+              "value": "fiction"
+            },
+            {
+              "key": "checkedOut",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Path Parameter",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.github.com/users/alijansqa",
+          "protocol": "https",
+          "host": [
+            "api",
+            "github",
+            "com"
+          ],
+          "path": [
+            "users",
+            "alijansqa"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Multi Path Parameters",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.github.com/users/alijansqa/repos/",
+          "protocol": "https",
+          "host": [
+            "api",
+            "github",
+            "com"
+          ],
+          "path": [
+            "users",
+            "alijansqa",
+            "repos",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Book by ID Path Variable",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books/:id",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "612492c1-deb1-4964-9b25-99bda66ffac8"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Book & Save it by Script in Env",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status is 201 Created\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\n// Recommended\r\n\r\nconst data= pm.response.json();\r\npm.environment.set(\"id\", data.id);\r\n\r\nconsole.log(pm.response.json());\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "apikey",
+          "apikey": [
+            {
+              "key": "key",
+              "value": "api-key",
+              "type": "string"
+            },
+            {
+              "key": "value",
+              "value": "{{api-key}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"Ali Jan is a Billionaire\",\r\n    \"author\": \"Ali Jan\",\r\n    \"genre\": \"REALITY\",\r\n    \"yearPublished\": 2026\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/books",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Fetch the Posted Book",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books/:id",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "{{id}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Log in Console by Script",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "console.log(pm.response.json())"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Book + Script",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 201 Created\", function () {\n    pm.response.to.have.status(201);\n});\n\n// Not Recommended\n/* */\n\nconst id = pm.response.json().id;\npm.environment.set(\"id2\", id);\n\n\nconsole.log(pm.response.json());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "api-key",
+            "value": "{{api-key}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"Ali Jan MoneyMaker\",\r\n    \"author\": \"Ali Jan\",\r\n    \"genre\": \"Reality\",\r\n    \"yearPublished\": 2026\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/books",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "FETCH Book by Variable created by Script",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books/{{id2}}",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books",
+            "{{id2}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH a Book",
+      "request": {
+        "auth": {
+          "type": "apikey",
+          "apikey": [
+            {
+              "key": "key",
+              "value": "api-key",
+              "type": "string"
+            },
+            {
+              "key": "value",
+              "value": "{{api-key}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"How to make Money\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/books/{{id2}}",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books",
+            "{{id2}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PATCH a Book by PATH VARIABLE",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books/:id",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "{{id2}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PUT a Book (Route Note Supported)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "api-key",
+            "value": "{{api-key}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\" : \"How to be a Billionaire\",\r\n    \"author\" : \"Ali Jan\",\r\n    \"genre\": \"Reality\",\r\n    \"yearPublished\": 2026\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/books/:id",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "{{id2}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create a Book to Delete",
+      "request": {
+        "auth": {
+          "type": "apikey",
+          "apikey": [
+            {
+              "key": "value",
+              "value": "{{api-key}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "api-key",
+            "value": "{{api-key}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\" : \"abc\",\r\n    \"author\" : \"Ali Jan\",\r\n    \"genre\": \"Reality\",\r\n    \"yearPublished\": 2026\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/books",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE the Created Book",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "api-key",
+            "value": "{{api-key}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/books/:id",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "d8f66a18-816c-4481-ad4c-2a873ae67544"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Check data value by Script",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"ID is Verified\", function() {\r\n\r\nconst data = pm.response.json();\r\n\r\npm.expect(data.id).to.eql(pm.environment.get(\"id2\"));\r\n\r\n//pm.expect(data.id).to.eql(1);\r\n\r\n\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books/{{id2}}",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books",
+            "{{id2}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Check data value a single Book by Script",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Book details are Verified\", function() {\r\n\r\nconst data = pm.response.json();\r\nconst savedId = pm.environment.get(\"id2\");\r\n\r\npm.expect(data.id).to.eql(savedId);\r\npm.expect(data.title).to.eql(\"How to make Money\");\r\npm.expect(data.genre).to.eql(\"Reality\");\r\npm.expect(data.yearPublished).to.eql(2026);\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}books/{{id2}}",
+          "host": [
+            "{{baseURL}}books"
+          ],
+          "path": [
+            "{{id2}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Check data value of all Books by Script",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Response is non-empty array\", function() {\r\n    const data = pm.response.json();\r\n    pm.expect(data).to.an('array').that.is.not.empty;\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Check data value for a single book for all fields by Script",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Every Book has id, title, author, genre, yearPublished \", function() {\n    const books = pm.response.json();\n    const firstBook= books[0];\n\n    pm.expect(firstBook).to.have.property('id');\n    pm.expect(firstBook).to.have.property('title');\n    pm.expect(firstBook).to.have.property('author');\n    pm.expect(firstBook).to.have.property('genre');\n    pm.expect(firstBook).to.have.property('yearPublished');\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Check data value for every single book for all fields by Script",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Every Book has id, title, author, genre, yearPublished \", function() {\r\n    const books = pm.response.json();\r\n    books.forEach(book => {\r\n\r\n    pm.expect(book).to.have.property('id');\r\n    pm.expect(book).to.have.property('title');\r\n    pm.expect(book).to.have.property('author');\r\n    pm.expect(book).to.have.property('genre');\r\n    pm.expect(book).to.have.property('yearPublished');\r\n});\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Check created Book exists somewhere in the list by script",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Created Book exists in the full list\", function () {\r\n    \r\n    const data = pm.response.json();\r\n\r\n    const savedId = pm.environment.get(\"id2\");\r\n    const exists = data.some(book => book.id === savedId);\r\n\r\n    pm.expect(exists).to.be.true;\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Check Response Speed by Script",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Response Speed is under 6000ms, It is Best\", function () {\r\n    pm.expect(pm.response.responseTime).to.be.below(6000);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "books"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
